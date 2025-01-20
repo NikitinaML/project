@@ -1,6 +1,7 @@
 # библиотеки
 
 import streamlit as st
+!pip install transformers
 from transformers import AutoTokenizer, AutoModel, AutoModelForSequenceClassification
 import pandas as pd
 import numpy as np
