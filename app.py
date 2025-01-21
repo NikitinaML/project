@@ -63,8 +63,7 @@ tokenizer = AutoTokenizer.from_pretrained("my_tokenizer")
 
 # загрузка данных
 
-st.write(f"Для определения темы введите текст")
-user_text = st.text_input('Текст для классификации')
+user_text = st.text_input('Enter your text')
 
 if len(user_text)>0:
     
@@ -83,6 +82,3 @@ if len(user_text)>0:
         logits = outputs.logits
         label_predict = np.argmax(logits.detach().cpu().numpy(), axis=1)[0]
         st.write(f"Topic: {idx_to_label[label_predict]}")
-
-else:
-    st.write(f"Вы не ввели текст")
