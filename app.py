@@ -63,6 +63,7 @@ tokenizer = AutoTokenizer.from_pretrained("my_tokenizer")
 
 # загрузка данных
 
+st.write(f"Для определения темы введите текст")
 user_text = st.text_input('Текст для классификации')
 
 text_pp = preprocess_text(user_text)
