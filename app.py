@@ -66,20 +66,18 @@ tokenizer = AutoTokenizer.from_pretrained("my_tokenizer")
 st.write(f"Для определения темы введите текст")
 user_text = st.text_input('Текст для классификации')
 
-if user_text in locals():
+text_pp = preprocess_text(user_text)
+text_token = tokenizer([text_pp], truncation = True, max_length=100, padding='max_length')
     
-    text_pp = preprocess_text(user_text)
-    text_token = tokenizer([text_pp], truncation = True, max_length=100, padding='max_length')
-    
-    for k in text_token.keys():
-        text_token[k] = torch.tensor(text_token[k])
+for k in text_token.keys():
+    text_token[k] = torch.tensor(text_token[k])
         
     
     
-    # предсказание
+# предсказание
     
-    with torch.no_grad():
-        outputs = model_trans(**text_token)
-        logits = outputs.logits
-        label_predict = np.argmax(logits.detach().cpu().numpy(), axis=1)[0]
-        st.write(f"Topic: {idx_to_label[label_predict]}")
+with torch.no_grad():
+    outputs = model_trans(**text_token)
+    logits = outputs.logits
+    label_predict = np.argmax(logits.detach().cpu().numpy(), axis=1)[0]
+    st.write(f"Topic: {idx_to_label[label_predict]}")
