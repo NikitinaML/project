@@ -80,4 +80,5 @@ with torch.no_grad():
     outputs = model_trans(**text_token)
     logits = outputs.logits
     label_predict = np.argmax(logits.detach().cpu().numpy(), axis=1)[0]
-    st.write(f"Topic: {idx_to_label[label_predict]}")
+    if len(user_text)>0:
+        st.write(f"Topic: {idx_to_label[label_predict]}")
