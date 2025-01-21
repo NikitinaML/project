@@ -66,7 +66,7 @@ tokenizer = AutoTokenizer.from_pretrained("my_tokenizer")
 st.write(f"Для определения темы введите текст")
 user_text = st.text_input('Текст для классификации')
 
-if user_text is not None:
+if user_text in locals():
     
     text_pp = preprocess_text(user_text)
     text_token = tokenizer([text_pp], truncation = True, max_length=100, padding='max_length')
